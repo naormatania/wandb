@@ -164,7 +164,7 @@ def notebook_metadata_from_jupyter_servers_and_kernel_id():
         if s.get("password"):
             raise ValueError("Can't query password protected kernel")
         res = requests.get(
-            urljoin(s["url"], "api/sessions"), params={"token": s.get("token", "")}
+            urljoin(s["url"], "api/sessions"), params={"token": s.get("token", "")}, verify=False
         ).json()
         for nn in res:
             if isinstance(nn, dict) and nn.get("kernel") and "notebook" in nn:
